@@ -19,26 +19,31 @@ import 'paginas/residenciaLaRioja.dart';
 import 'paginas/saica.dart';
 
 void main() {
-  runApp(MaterialApp(initialRoute: '/', routes: {
-    // When navigating to the "/" route, build the MyApp widget.
-    '/': (context) => MyApp(),
+  runApp(
+    MaterialApp(
+      initialRoute: '/',
+      routes: {
+        // When navigating to the "/" route, build the MyApp widget.
+        '/': (context) => MyApp(),
 
-    '/poligono': (context) => Poligono(),
-    '/logPoligono': (context) => LoPoligono(),
-    '/res_la_rioja': (context) => ResLaRioja(),
-    '/res_r_sofia': (context) => ResReinaSofia(),
-    '/crown': (context) => Crown(),
-    '/proba': (context) => Proba(),
-    '/inconal': (context) => Inconal(),
-    '/grafometal': (context) => Grafometal(),
-    '/saica': (context) => Saica(),
-    '/logSaica': (context) => LogSaica(),
-    '/logLogista': (context) => LogLogista(),
-    '/logIac1': (contex) => LogIac1(),
-    '/logIac2': (contex) => LogIac2(),
-    '/iac1Log': (context) => Iac1Log(),
-    '/iac2Log': (context) => Iac2Log(),
-    '/logIac3': (context) => LogIac3(),
-    '/iac3Log': (conteext) => Iac3Log(),
-  }));
+        '/poligono': (context) => Poligono(),
+        '/logPoligono': (context) => LoPoligono(),
+        '/res_la_rioja': (context) => ResLaRioja(),
+        '/res_r_sofia': (context) => ResReinaSofia(),
+        '/crown': (context) => Crown(),
+        '/proba': (context) => Proba(),
+        '/inconal': (context) => Inconal(),
+        '/grafometal': (context) => Grafometal(),
+        '/saica': (context) => Saica(),
+        '/logSaica': (context) => LogSaica(),
+        '/logLogista': (context) => LogLogista(),
+        '/logIac1': (context) => LogIac1(),
+        '/logIac2': (context) => LogIac2(),
+        '/iac1Log': (context) => Iac1Log(),
+        '/iac2Log': (context) => Iac2Log(),
+        '/logIac3': (context) => LogIac3(),
+        '/iac3Log': (context) => Iac3Log(),
+      },
+    ),
+  );
 }
