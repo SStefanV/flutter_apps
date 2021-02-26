@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_app/constants.dart';
 
 void main() => runApp(MaterialApp(
       home: Home(),
@@ -11,7 +12,11 @@ String rutas =
     '"Logroño-Zaragoza": {"luni-vineri":"6:45 9:30 12:30 ", "sabado":"12:30", "domingo":"11:00 16:00 20:00"},'
     '"Logroño-Sto.Domingo":{"luni-vineri": "7:10 7:15 7:30 8:30 13:00 14:45 16:30 17:30", "sabado": "7:30 14:45", "domingo": "13:00 17:00"},'
     '"Burgos-Logroño": {"luni-vineri": "7:30 10:30 15:00 18:00", "sabado": "10:30 18:00", "domingo": "18:00 20:30"},'
-    '"Burgos-Zaragoza": {"luni-vineri": "7:30 10:30", "sabado": "10:30", "domingo": "18:00"}}';
+    '"Burgos-Zaragoza": {"luni-vineri": "7:30 10:30", "sabado": "10:30", "domingo": "18:00"},'
+    '"Logroño-Haro": {"luni-vineri": "7:30 9:15 10:15 13:00 15:00 17:00 19:00 19:15 20:00","sabado": "10:15 13:00 17:00 20:00", "domingo": "10:15 17:00 20:30"},'
+    '"Logroño-Miranda": {"luni-vineri": "10:15 13:00 17:00 19:00", "sabado": "10:15 17:00", "domingo": "10:15 17:00"},'
+    '"Logroño-Calahorra": {"luni-vineri": "8:00 10:15 13:00 14:45 16:30 18:15 19:00 20:00", "sabado": "7:45 10:15 13:00 16:30 18:15 20:00", "domingo": "10:15 16:30 21:00"},'
+    '"Logroño-Arnedo": {"luni-vineri": "10:00 13:00 14:45 16:30 18:15 19:20", "sabado": "10:15 13:00 16:30 18:15 20", "domingo": "10:15 16:30 21:00"}}';
 
 class Home extends StatefulWidget {
   @override
@@ -23,16 +28,20 @@ class _HomeState extends State<Home> {
     'Logroño-Burgos',
     'Logroño-Zaragoza',
     'Logroño-Sto.Domingo',
+    'Logroño-Haro',
+    'Logroño-Miranda',
+    'Logroño-Calahorra',
+    'Logroño-Arnedo',
     'Burgos-Logroño',
-    'Burgos-Zaragoza'
+    'Burgos-Zaragoza',
   ];
 
   var my_data = json.decode(rutas);
   String horrario = '?';
   String sab = '?';
   String dom = '?';
-
   String rutaInicial = 'Logroño-Burgos';
+
   void getData() {
     setState(() {
       horrario = my_data[rutaInicial]["luni-vineri"];
@@ -60,7 +69,6 @@ class _HomeState extends State<Home> {
       itemExtent: 32.0,
       backgroundColor: Colors.lightBlue,
       onSelectedItemChanged: (selectedIndex) {
-        print(selectedIndex);
         rutaInicial = listaRutas[selectedIndex];
         getData();
       },
@@ -81,109 +89,72 @@ class _HomeState extends State<Home> {
       appBar: AppBar(
         title: Text('HORARIOS'),
         centerTitle: true,
-        backgroundColor: Colors.blue,
+        backgroundColor: Color(0xfff0a0d22),
       ),
-      body: Padding(
-        padding: const EdgeInsets.only(left: 10.0, top: 20),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Column(
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding: const EdgeInsets.fromLTRB(15, 20, 0, 0),
+            child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(
-                  height: 15,
+                  height: 20,
                 ),
                 Text(
                   rutaInicial,
                   style: TextStyle(
                     color: Color(0xfff0c0a3a),
-                    fontSize: 28,
+                    fontSize: 30,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
                 SizedBox(
-                  height: 15,
+                  height: 20,
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(bottom: 5.0),
+                  padding: const EdgeInsets.only(bottom: 4.0),
                   child: Text(
                     'Lunes a Viernes',
-                    style: TextStyle(
-                      fontSize: 19,
-                      color: Color(0xfff0c0a3a),
-                    ),
+                    style: kSubTitleStyle,
                   ),
                 ),
-                Text(
-                  horrario,
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 21,
-                    fontWeight: FontWeight.bold,
-                    fontStyle: FontStyle.italic,
-                  ),
-                ),
+                Text(horrario, style: kTextStyle),
                 Padding(
                   padding: const EdgeInsets.only(
-                    top: 5.0,
-                    bottom: 5.0,
+                    top: 10.0,
+                    bottom: 4.0,
                   ),
-                  child: Text(
-                    'Sabado:',
-                    style: TextStyle(
-                      fontSize: 19,
-                      color: Color(0xfff0c0a3a),
-                    ),
-                  ),
+                  child: Text('Sabado:', style: kSubTitleStyle),
                 ),
-                Text(
-                  sab,
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 21,
-                    fontWeight: FontWeight.bold,
-                    fontStyle: FontStyle.italic,
-                  ),
-                ),
+                Text(sab, style: kTextStyle),
                 Padding(
                   padding: const EdgeInsets.only(
-                    top: 5.0,
-                    bottom: 5.0,
+                    top: 10.0,
+                    bottom: 4.0,
                   ),
-                  child: Text(
-                    'Domingo:',
-                    style: TextStyle(
-                      fontSize: 19,
-                      color: Color(0xfff0c0a3a),
-                    ),
-                  ),
+                  child: Text('Domingo:', style: kSubTitleStyle),
                 ),
                 Text(
                   dom,
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 21,
-                    fontWeight: FontWeight.bold,
-                    fontStyle: FontStyle.italic,
-                  ),
+                  style: kTextStyle,
                 ),
               ],
             ),
-            Column(
-              children: [
-                Container(
-                  height: 150.0,
-                  alignment: Alignment.center,
-                  padding: EdgeInsets.only(bottom: 30.0),
-                  color: Colors.lightBlue,
-                  child: IOSPicker(),
-                ),
-              ],
-            ),
-          ],
-        ),
+          ),
+          Column(
+            children: [
+              Container(
+                height: 150.0,
+                alignment: Alignment.center,
+                padding: EdgeInsets.only(bottom: 30.0),
+                child: IOSPicker(),
+              ),
+            ],
+          ),
+        ],
       ),
       //
       // RaisedButton.icon(
