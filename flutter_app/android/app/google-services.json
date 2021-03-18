@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "712956539767",
+    "project_id": "horarios-d3234",
+    "storage_bucket": "horarios-d3234.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:712956539767:android:09c341227923abb54d2772",
+        "android_client_info": {
+          "package_name": "raku.flutter_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "712956539767-ibgvgrkhkm9gc49i89kpg4oeq6kmvaob.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBcv6TI63KNMiRBulng3gwETh3w9YrYHsk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "712956539767-ibgvgrkhkm9gc49i89kpg4oeq6kmvaob.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

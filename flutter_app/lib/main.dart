@@ -1,13 +1,19 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_app/constants.dart';
 import 'resources.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
-void main() => runApp(MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Home(),
-    ));
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  runApp(MaterialApp(
+    debugShowCheckedModeBanner: false,
+    home: Home(),
+  ));
+}
 
 class Home extends StatefulWidget {
   @override
@@ -20,13 +26,20 @@ class _HomeState extends State<Home> {
   String dom = '?';
   String rutaInicial = 'Logroño-Burgos';
   Resurse res = Resurse();
+  final _firestore = FirebaseFirestore.instance;
 
-  void getData() {
-    var my_data = json.decode(res.getRutas());
+  void getData() async {
+    final messages = await _firestore.collection(rutaInicial).get();
+    //var my_data = json.decode(res.getRutas());
     setState(() {
-      horrario = my_data[rutaInicial]["luni-vineri"];
-      sab = my_data[rutaInicial]["sabado"];
-      dom = my_data[rutaInicial]["domingo"];
+      for (var message in messages.docs) {
+        horrario = message['luni-vineri'];
+        sab = message['sabado'];
+        dom = message['domingo'];
+      }
+      // horrario = my_data[rutaInicial]["luni-vineri"];
+      //sab = my_data[rutaInicial]["sabado"];
+      //dom = my_data[rutaInicial]["domingo"];
     });
   }
 
@@ -38,6 +51,7 @@ class _HomeState extends State<Home> {
         Text(
           ruta,
           style: TextStyle(
+            letterSpacing: 1.1,
             color: Color(0xfff0c0a3a),
             fontSize: 22,
           ),
@@ -46,8 +60,10 @@ class _HomeState extends State<Home> {
     }
 
     return CupertinoPicker(
+      //useMagnifier: true,
+
       itemExtent: 32.0,
-      backgroundColor: Colors.lightBlue,
+      //backgroundColor: Colors.,
       onSelectedItemChanged: (selectedIndex) {
         rutaInicial = res.getListaRutas()[selectedIndex];
         getData();
@@ -76,7 +92,7 @@ class _HomeState extends State<Home> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
-            padding: const EdgeInsets.fromLTRB(15, 20, 0, 0),
+            padding: const EdgeInsets.fromLTRB(10, 20, 0, 0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -107,7 +123,10 @@ class _HomeState extends State<Home> {
                     top: 10.0,
                     bottom: 4.0,
                   ),
-                  child: Text('Sabado:', style: kSubTitleStyle),
+                  child: Text(
+                    'Sabado:',
+                    style: kSubTitleStyle,
+                  ),
                 ),
                 Text(sab, style: kTextStyle),
                 Padding(
@@ -127,9 +146,9 @@ class _HomeState extends State<Home> {
           Column(
             children: [
               Container(
-                height: 150.0,
+                height: 250.0,
                 alignment: Alignment.center,
-                padding: EdgeInsets.only(bottom: 30.0),
+                padding: EdgeInsets.only(bottom: 10.0),
                 child: IOSPicker(),
               ),
             ],

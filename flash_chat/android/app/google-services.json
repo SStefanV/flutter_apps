@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "75300771848",
+    "project_id": "chatflash-77f88",
+    "storage_bucket": "chatflash-77f88.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:75300771848:android:1db88337ee594c5f2299bd",
+        "android_client_info": {
+          "package_name": "com.raku.flash_chat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "75300771848-h8eb3cgsv1j2h52ebmv2se05fj6ltp1r.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDs1uYxtyahIkM-hN4U8431H971V23zqOU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "75300771848-h8eb3cgsv1j2h52ebmv2se05fj6ltp1r.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
