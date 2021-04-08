@@ -3,6 +3,7 @@ import 'package:raku_flash_chat/constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:raku_flash_chat/screens/registration_screen.dart';
+import 'package:intl/intl.dart';
 
 final _firestore = FirebaseFirestore.instance;
 User loggedInUser;
@@ -19,7 +20,6 @@ class _ChatScreenState extends State<ChatScreen> {
   String messageText;
 
   var timestamp = FieldValue.serverTimestamp();
-
   final controler = TextEditingController();
 
   @override
@@ -53,6 +53,13 @@ class _ChatScreenState extends State<ChatScreen> {
         print(message.data());
       }
     }
+  }
+
+  String getTime() {
+    var now = new DateTime.now();
+    var formatter = new DateFormat('HH:mm');
+    String formattedDate = formatter.format(now);
+    return formattedDate;
   }
 
   @override
@@ -103,6 +110,7 @@ class _ChatScreenState extends State<ChatScreen> {
                         'sender': loggedInUser.email,
                         'time': timestamp,
                         'nick': nick,
+                        'timeToDisplay': getTime(),
                       });
                       setState(() {
                         controler.text = '';
@@ -147,6 +155,7 @@ class MessagesStream extends StatelessWidget {
           final messageText = message.data()['text'];
           final messageSender = message.data()['sender'];
           final nickName = message.data()['nick'];
+          final timeToShow = message.data()['timeToDisplay'];
 
           final currentUser = loggedInUser.email;
 
@@ -154,6 +163,7 @@ class MessagesStream extends StatelessWidget {
             sender: nickName,
             text: messageText,
             isMe: currentUser == messageSender,
+            time: timeToShow,
           );
           messageBubbles.add(messageBubble);
         }
@@ -173,10 +183,12 @@ class MessagesStream extends StatelessWidget {
 }
 
 class MessageBubble extends StatelessWidget {
-  MessageBubble({this.sender, this.text, this.isMe});
+  MessageBubble({this.sender, this.text, this.isMe, this.time});
   final String sender;
   final String text;
   final bool isMe;
+  final String time;
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -188,7 +200,7 @@ class MessageBubble extends StatelessWidget {
             isMe ? CrossAxisAlignment.end : CrossAxisAlignment.start,
         children: [
           Text(
-            sender,
+            ' $sender $time',
             style: TextStyle(fontSize: 12, color: Colors.black54),
           ),
           Material(

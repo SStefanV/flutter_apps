@@ -67,6 +67,9 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                   hintText: 'Enter your password',
                 ),
               ),
+              SizedBox(
+                height: 8.0,
+              ),
               TextField(
                 textAlign: TextAlign.center,
                 onChanged: (value) {
